@@ -1,7 +1,11 @@
 import discord
-
 from yttranscript import summarizer
+#to load bot_token
+from dotenv import load_dotenv
+import os
 
+#BOT CREDENTIALS
+load_dotenv('.env')
 
 
 
@@ -42,4 +46,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run('OTM1NzM5MDQ3MDc3MzcxOTA0.YfDA5g.0Mv32SOr1iN2TycNl4nwbzUePU4')
+client.run(os.getenv('BOT_TOKEN'))
