@@ -7,9 +7,10 @@ def summarizer(link):
     VIDEO = link
 
     #a youtube videos id is need, which is just the part of the url after the "=".
-
-    VideoId = VIDEO[(VIDEO.index('=')+1):]
-
+    if '=' in VIDEO:
+        VideoId = VIDEO[(VIDEO.index('=')+1):]
+    else:
+        VideoId = VIDEO[(VIDEO.index('e/'))]
 
     #getting transcript of video using YoutubeTranscriptApi
     transcript = YouTubeTranscriptApi.get_transcript(VideoId)
