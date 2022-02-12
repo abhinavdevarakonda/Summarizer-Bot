@@ -7,10 +7,13 @@ def summarizer(link):
     VIDEO = link
 
     #a youtube videos id is need, which is just the part of the url after the "=".
+    #for viewing videos on the pc, video id is located after the "=" sign
+    #but in mobiles the video id is just after the "/" sign
     if '=' in VIDEO:
         VideoId = VIDEO[(VIDEO.index('=')+1):]
     else:
-        VideoId = VIDEO[(VIDEO.index('e/'))]
+        #rfind() locates the last occuring element of given character
+        VideoId = VIDEO[VIDEO.rfind('/')]
 
     #getting transcript of video using YoutubeTranscriptApi
     transcript = YouTubeTranscriptApi.get_transcript(VideoId)
