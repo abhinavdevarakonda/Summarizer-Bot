@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 import os
 
 #BOT CREDENTIALS
-load_dotenv('.env')
+load_dotenv()
+BOT_TOKEN = os.getenv('DISCORD_TOKEN')
 
 
 
@@ -18,16 +19,19 @@ class MyClient(discord.Client):
         print('------')
 
     async def on_message(self, message):
+        print('user sent a message!: ', message.content)
         global video_link
-        # we do not want the bot to reply to itself
 
+        # we do not want the bot to reply to itself
         if message.author.id == self.user.id:
             return
 
         if message.content.startswith('!help '):
+            print('help message sent!')
             await message.channel.send('1.  !summarize <youtube-video-link> ---  to summarize transcript of youtube video provided.')
 
         if message.content.startswith('!summarize '):
+            print('user asked to summarize')
             s = message.content.split()
             video_link = s[1]
             print(video_link)
@@ -45,5 +49,6 @@ class MyClient(discord.Client):
 
 
 
-client = MyClient()
-client.run(os.getenv('BOT_TOKEN'))
+intents = discord.Intents.all()
+client = MyClient(intents=intents)
+client.run(BOT_TOKEN) 
